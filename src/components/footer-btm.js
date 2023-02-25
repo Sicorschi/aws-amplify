@@ -61,20 +61,27 @@ class FooterBtm  extends LitElement {
         display: block;
       }
       li {
-        width: 40%;
+        padding: 12px;
+        margin: 12px;
+        background-color: white;
+        border-radius: 12px;
       }
       .content-body {
-        width: 15%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+      div {
+        margin: 12px;
       }
     `;
   }
 
   render() {
+    const finishedCount = this.todos.filter(e => e.finished).length;
+    const unfinishedCount = this.todos.length - finishedCount;
     return html`
-      <input id="addTodoInput" placeholder="Name" />
+      <input id="addTodoInput" placeholder="Add new task to do!" />
       <button @click="${this._addNew}">Add</button>
       <ol>${this.todos.map( todo => html`
         <div class="content-body">
@@ -91,6 +98,10 @@ class FooterBtm  extends LitElement {
           `,
         )}
       </ol>
+
+      <div>Total finished: ${finishedCount}</div>
+      <div>Total unfinished: ${unfinishedCount}</div>
+  
       ${footerTemplate}
     `;
   }
